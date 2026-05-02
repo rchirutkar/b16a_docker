@@ -1,4 +1,6 @@
-Studing Docker Container concept:
+# Studing Docker Container concept:
+
+### Note: For a reference we have take MERN as a project setup:
 1. Docker Container
 2. Docker Network
      1. Bridge Network is default nw type in docker
