@@ -1,0 +1,35 @@
+services:
+  backend:
+    build: ./backend
+    # context: ./backend
+    # dockerfile: DockerFile
+    container_name: tm_b16a_backend
+    ports:
+      - "3017:3001"
+    # volumes:
+    #   - ./backend:/app
+    environment:
+      PORT: 3001
+      MONGO_URI: mongodb://tm_b16a_database:27017/travel_memory
+    networks:
+      - tm_b16a_network
+    depends_on:
+      - database
+
+  database:
+    image: mongo:latest
+    container_name: tm_b16a_database
+    ports: #comment this if we don't want to access the database from outside the docker network
+      - "27019:27017"
+    volumes:
+      - mongo_data_tm:/data/db
+    networks:
+      - tm_b16a_network
+
+volumes:
+  mongo_data_tm:
+
+networks:
+  tm_b16a_network:
+  default:
+    name: tm_b16a_network
